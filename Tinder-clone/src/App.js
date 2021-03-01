@@ -6,16 +6,19 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 const App = () => {
     return (
         <div className="app">
-            
             <Router>
-                <Header /> 
                 <Switch>
+                    <Route path='/chat'>
+                        <Header backButton='/'/>
+                        <h2>Hello chat box</h2>
+                    </Route>
                     <Route path='/' >
-                       <TinderCards /> 
+                        <Header />
+                       <TinderCards />
+                       <SwipeButtons /> 
                     </Route>
                 </Switch>  
             </Router>
-            <SwipeButtons />
         </div>
     )
     

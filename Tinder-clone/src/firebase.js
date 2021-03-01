@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-
+import { ApiKey, AuthDomain, ProjectId, StorageBucket, MessagingSenderId, AppId} from './env.js'
 const firebaseConfig = {
     apiKey: ApiKey,
     authDomain: AuthDomain,
