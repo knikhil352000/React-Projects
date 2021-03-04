@@ -1,3 +1,4 @@
+import { Avatar } from '@material-ui/core'
 import React,{useState} from 'react'
 import './ChatScreen.css'
 const ChatScreen = () => {
@@ -18,11 +19,23 @@ const ChatScreen = () => {
     ])
     return (
         <div className='chatScreen'>
-            <p>YOU MATCHED WITH ELLEN ON 11/11/2020</p>
+            <p className='chatScreen__timestamp'>YOU MATCHED WITH ELLEN ON 11/11/2020</p>
             {messages.map(message => (
+                message.name ? (
                 <div className='chatScreen__message'>
-                    <p>{message.message}</p>
-                </div>
+                    <Avatar 
+                        className='chatScreen__image'
+                        alt={message.name}
+                        src={message.image}
+                    />
+                    <p className='chatScreen__text'>{message.message}</p>
+                </div>  
+                ) : (
+                    <div className='chatScreen__message'>
+                        <p className='chatScreen__textUser'>{message.message}</p>
+                    </div>  
+                )
+                
             ))}
         </div>
     )
