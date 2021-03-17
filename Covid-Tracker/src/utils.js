@@ -1,12 +1,13 @@
-import { Circle } from "react-leaflet";
+import { Circle, Popup } from "react-leaflet";
 import React from 'react'
-import numeral  from "numeral";
+import numeral from "numeral";
+
 const caseTypeColors = {
     cases: {
         hex: '#cc1034',
         rgb: 'rgb(204, 16, 52)',
         half_op: 'rgba(204, 16, 52, 0.3)',
-        multiplier: 800
+        multiplier: 200
     },
     recovered: {
         hex: '#7dd71d',
@@ -38,8 +39,21 @@ export const showDataOnMap = (data, caseType='cases') => (
         <Circle
             center={[country.countryInfo.lat, country.countryInfo.long]}
             fillOpacity={0.4}
+            color={caseTypeColors[caseType].hex}
+            fillColor={caseTypeColors[caseType].hex}
+            radius={
+                Math.sqrt(country[caseType]) * caseTypeColors[caseType].multiplier
+            }
         >
-
+            <Popup>
+                <div>
+                    <div>{country.country}</div>
+                    <div style={{backgroundImage: `url(${country.countryInfo.flag})`}}></div>
+                    <div>Cases: {numeral(country.cases).format('0.0')}</div>
+                    <div>Recovered: {numeral(country.recovered).format('0.0')}</div>
+                    <div>Deaths: {numeral(country.deaths).format('0.0')}</div>
+                </div>
+            </Popup>
         </Circle>
     ))
 )

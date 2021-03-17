@@ -1,7 +1,8 @@
 import React from 'react'
 import './Map.css'
 import { MapContainer, TileLayer } from 'react-leaflet'
-const Map = ({center, zoom}) => { 
+import { showDataOnMap } from './utils'
+const Map = ({countries, caseType, center, zoom}) => { 
     return (
         <div className='map'>
             <MapContainer center={center} zoom={zoom}>
@@ -9,6 +10,9 @@ const Map = ({center, zoom}) => {
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
+                {
+                    showDataOnMap(countries, caseType)
+                }
             </MapContainer>
         </div>
     )
