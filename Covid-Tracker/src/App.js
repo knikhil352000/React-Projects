@@ -6,11 +6,14 @@ import InfoBox from './InfoBox'
 import Map from './Map'
 import {sortData} from './utils'
 import LineGraph from './LineGraph'
+import 'leaflet/dist/leaflet.css'
 const App = () => {
     const [countries, setCountries] = useState([])
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([])
+    const [mapCenter, setMapCenter] = useState({lat: 34.80746, lng: -40.4796})
+    const [mapZoom, setMapZoom] = useState(3)
     const onCounrtyChange = async(e) => {
         const countryCode = e.target.value;
         const url = countryCode === 'worldwide' 
@@ -75,7 +78,7 @@ const App = () => {
                     <InfoBox title='Recovered' cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
                     <InfoBox title='Deaths' cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
                 </div>
-                <Map />
+                <Map center={mapCenter} zoom={mapZoom}/>
             </div>
             <Card className='app__right'>
                 <CardContent>
