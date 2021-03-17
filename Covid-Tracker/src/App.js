@@ -5,6 +5,12 @@ const App = () => {
     const [countries, setCountries] = useState([
         'USA', 'UK', 'INDIA', 'BANGLADESH'
     ])
+    const [country, setCountry] = useState('worldwide');
+
+    const onCounrtyChange = async(e) => {
+        const countryCode = e.target.value;
+        setCountry(countryCode);
+    }
 
     useEffect(() => {
         const getCountriesData = async() => {
@@ -29,8 +35,10 @@ const App = () => {
                 <FormControl className='app__dropdown'>
                     <Select 
                         variant='outlined'
-                        value='abc'
+                        value={country}
+                        onChange={onCounrtyChange}
                     >
+                        <MenuItem value='worldwide'>Worldwide</MenuItem>
                         {
                             countries.map(country => (
                                 <MenuItem value={country.value}>{country.name}</MenuItem>
