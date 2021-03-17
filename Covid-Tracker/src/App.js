@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl, MenuItem, Select, Card, CardContent } from '@material-ui/core'
 import './App.css'
+import Table from './Table'
 import InfoBox from './InfoBox'
 import Map from './Map'
+import {sortData} from './utils'
 const App = () => {
     const [countries, setCountries] = useState([])
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
+    const [tableData, setTableData] = useState([])
     const onCounrtyChange = async(e) => {
         const countryCode = e.target.value;
         const url = countryCode === 'worldwide' 
@@ -38,6 +41,8 @@ const App = () => {
                         value: country.countryInfo.iso2, // UK, US
                     }
                 ))
+                const sortedData = sortData(data);
+                setTableData(sortedData)
                 setCountries(countries);
             })
         }
@@ -74,6 +79,7 @@ const App = () => {
             <Card className='app__right'>
                 <CardContent>
                     <h3>Live Cases by Country</h3>
+                    <Table countries={tableData}/>
                     <h3>Worldwide new cases</h3>
                 </CardContent>
             </Card>
