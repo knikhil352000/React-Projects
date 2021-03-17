@@ -12,8 +12,9 @@ const App = () => {
     const [country, setCountry] = useState('worldwide');
     const [countryInfo, setCountryInfo] = useState({});
     const [tableData, setTableData] = useState([])
-    const [mapCenter, setMapCenter] = useState({lat: 34.80746, lng: -40.4796})
-    const [mapZoom, setMapZoom] = useState(3)
+    const [mapCenter, setMapCenter] = useState({lat: 17.80746, lng: -88.4796})
+    const [mapZoom, setMapZoom] = useState(7)
+    const [mapCountries, setMapCountries] = useState([])
     const onCounrtyChange = async(e) => {
         const countryCode = e.target.value;
         const url = countryCode === 'worldwide' 
@@ -24,15 +25,18 @@ const App = () => {
             .then(data => {
                 setCountryInfo(data);
                 setCountry(countryCode);
+                setMapCenter([data.countryInfo.lat,data.countryInfo.long]) 
+                setMapZoom(7);
+                
             })
     }
     useEffect(() => {
         fetch('https://disease.sh/v3/covid-19/all')
         .then(response => response.json())
-        .then(data => {
+        .then(data => { 
             setCountryInfo(data);
         })
-    }, [])
+    }, [mapCenter])
 
     useEffect(() => {
         const getCountriesData = async() => {
@@ -48,6 +52,7 @@ const App = () => {
                 const sortedData = sortData(data);
                 setTableData(sortedData)
                 setCountries(countries);
+                setMapCountries(data);
             })
         }
         getCountriesData();
@@ -78,7 +83,7 @@ const App = () => {
                     <InfoBox title='Recovered' cases={countryInfo.todayRecovered} total={countryInfo.recovered}/>
                     <InfoBox title='Deaths' cases={countryInfo.todayDeaths} total={countryInfo.deaths}/>
                 </div>
-                <Map center={mapCenter} zoom={mapZoom}/>
+                <Map countries={mapCountries} center={mapCenter} zoom={mapZoom}/>
             </div>
             <Card className='app__right'>
                 <CardContent>
