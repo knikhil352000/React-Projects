@@ -76,7 +76,7 @@ const LineGraph = ({caseType= 'cases'}) => {
         fetchData();
     }, [caseType])
     return (
-        <div>
+        <div className='app__graph'>
             {
                 data?.length > 0 && (
                     <Line
