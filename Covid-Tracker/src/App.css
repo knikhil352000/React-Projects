@@ -60,4 +60,21 @@ h1 {
     .app {
         flex-direction: column;
     }
+    .app__dropdown{
+        width: 200px;
+    }
+    .app__right{
+        margin-top: 20px;
+    }
+}
+@media (max-width: 628px) {
+    .app__stats {
+        flex-direction: column;
+    }
+    .infoBox:not(:last-child) {
+        margin-bottom: 15px;
+    }
+    .infoBox:last-child {
+        margin-right: 15px;
+    }
 }
