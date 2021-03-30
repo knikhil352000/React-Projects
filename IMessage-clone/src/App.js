@@ -1,9 +1,9 @@
 import React from 'react'
 import Imessage from './Imessage';
+import './App.css'
 const App = () => {
     return (
         <div className="app">
-            <h1>Hello World</h1>
 
             <Imessage />
         </div>
